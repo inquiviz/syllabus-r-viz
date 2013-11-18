@@ -1,8 +1,6 @@
-library(tm)
-library(wordcloud)
-library(Rstem)
-
-#files <- file.path("./temp", c("syllabus1.pdf", "syllabus2.pdf", "syllabus3.pdf", "syllabus4.pdf", "syllabus5.pdf", "syllabus6.pdf", "syllabus7.pdf", "syllabus8.pdf", "syllabus9.pdf"))
+require(tm)
+require(wordcloud)
+require(Rstem)
 
 files <- file.path("./temp", system("ls ./temp | grep pdf", intern=TRUE))
 
@@ -42,7 +40,7 @@ d <- d[nchar(row.names(d)) < 20, ]
 # aggregate freqeuncy by word stem and
 # keep first words..
 agg_freq <- aggregate(freq ~ stem, data = d, sum)
-agg_word <- aggregate(word ~ stem, data = d, function(x) x[1])
+agg_word <- aggregate(word ~ stem, dasta = d, function(x) x[1])
 
 d <- cbind(freq = agg_freq[, 2], agg_word)
 
